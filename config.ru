@@ -1,6 +1,7 @@
 require "sinatra"
 require "net/http"
 require "json"
+require "uri"
 
 post "/" do
   p params
@@ -13,7 +14,7 @@ post "/" do
 
   webhook_body = JSON.dump({ "text" => message })
 
-  Net::HTTP.post_form(ENV["WEBHOOK_URL"], "payload" => webhook_body)
+  Net::HTTP.post_form(URI(ENV["WEBHOOK_URL"]), "payload" => webhook_body)
 
   "Your message has been forwarded to the admins, we'll get in touch as soon as possible."
 end
