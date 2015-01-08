@@ -22,3 +22,5 @@ post "/" do
 
   "Your message has been forwarded to the admins, we'll get in touch as soon as possible."
 end
+
+run Sinatra::Application
