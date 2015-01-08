@@ -2,13 +2,9 @@ require "sinatra"
 require "net/http"
 require "json"
 
-def parse_body(body)
-  body.split("\n").map { |line| line.split("=", 2) }.to_h
-end
-
 post "/" do
   request.body.rewind
-  body = parse_body(request.body.read)
+  body = request.body.read.split("\n").map { |line| line.split("=", 2) }.to_h
 
   if body["token"] != ENV["INTEGRATION_TOKEN"]
     halt 401
