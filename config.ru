@@ -3,18 +3,13 @@ require "net/http"
 require "json"
 
 post "/" do
-  request.body.rewind
-  body_str = request.body.read
-  body = body_str.split("\n").map { |line| line.split("=", 2) }.to_h
+  p params
 
-  p body_str
-  p body
-
-  if body["token"] != ENV["INTEGRATION_TOKEN"]
+  if params["token"] != ENV["INTEGRATION_TOKEN"]
     halt 401
   end
 
-  message = "Message from #{body["user_name"]} in ##{body["channel_name"]}:\n\n#{body["text"]}"
+  message = "Message from #{params["user_name"]} in ##{params["channel_name"]}:\n\n#{params["text"]}"
 
   webhook_body = JSON.dump({ "text" => message })
 
