@@ -4,7 +4,11 @@ require "json"
 
 post "/" do
   request.body.rewind
-  body = request.body.read.split("\n").map { |line| line.split("=", 2) }.to_h
+  body_str = request.body.read
+  body = body_str.split("\n").map { |line| line.split("=", 2) }.to_h
+
+  p body_str
+  p body
 
   if body["token"] != ENV["INTEGRATION_TOKEN"]
     halt 401
