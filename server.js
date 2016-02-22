@@ -35,10 +35,10 @@ app.post('/', (req, res) => {
             return res.text()
         }
     })
-    .then(() => res.end("Your message has been forwarded to the admins, we'll get in touch as soon as possible."))
+    .then(() => res.end("Your message has been forwarded to the admins, we'll get in touch as soon as possible.\n"))
     .catch(err => {
        console.warn(err)
-       res.status(500).end("There was an error sending your request")
+       res.status(500).end("There was an error sending your request\n")
     })
 
 })
